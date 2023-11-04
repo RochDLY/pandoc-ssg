@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="fr" xml:lang="fr">
+    <head>
+        ${partials/head.html()}
+    </head>
+    <body>
+        ${partials/header.html()}
+        ${partials/nav.html()}
+        <main>
+            ${if(title)}
+            <header>
+                <h1>${title}</h1>
+            </header>
+            ${endif}
+            ${if(body)}
+            <div>
+                ${body}
+            </div>
+            ${endif}
+        </main>
+        ${partials/footer.html()}
+    </body>
+</html>
