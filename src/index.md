@@ -1,8 +1,8 @@
 ---
 title: Accueil
+description: |
+  Description du site à faire
 ---
-
-Carnet de notes
 
 ## Billets
 
