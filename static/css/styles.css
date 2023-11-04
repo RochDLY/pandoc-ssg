@@ -21,6 +21,7 @@ footer {
     grid-row: 2;
     background-color: rgb(255, 255, 255);
     border: 3px solid black;
+    padding: 1em;
 }
 
 .description-site {
@@ -68,6 +69,25 @@ footer {
     border: 3px solid black;
 }
 
+.posts-list a:link, a:visited,
+.content a:link, a:visited,
+footer a:link, a:visited {
+    background-color: white;
+    color: black;
+    border: 1px dotted black;
+    padding: 1px 2px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.posts-list a:hover, a:active,
+.content a:hover, a:active,
+footer a:hover, a:active {
+    background-color: #333;
+    color: white;
+}
+
 .side {
     position: -webkit-sticky;
     position: sticky;
@@ -81,4 +101,13 @@ footer {
 
 .toc ul {
     list-style: none;
+}
+
+.toc a {
+    text-decoration: none;
+    color: black;
+}
+
+.toc a:hover {
+    text-decoration: underline;
 }

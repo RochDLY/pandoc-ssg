@@ -18,7 +18,7 @@ $(foreach s,$(STATIC),$(foreach t,$(filter %$(notdir $s),$(STATIC_DIST)),$(eval 
 $(STATIC_DIST):; $(if $(wildcard $(@D)),,mkdir -p $(@D) &&) cp $^ $@
 
 references = src/bibliography/references.bib
-csl_files = templates/csl/apa.csl
+csl_file = templates/csl/apa.csl
 
 PANDOCFLAGS = \
 	--from markdown \
@@ -27,7 +27,7 @@ PANDOCFLAGS = \
 	--citeproc \
 	--wrap none \
 	--bibliography $(references) \
-#	--csl $(csl_file)
+	--csl $(csl_file)
 
 
 #############################COMMANDS###########################

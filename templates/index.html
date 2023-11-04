@@ -8,15 +8,11 @@
             ${if(title)}
             <div class="description-site">
                 <h1>${title}</h1>
-                ${if(description)}
                 <p>${description}</p>
             </div>
-            ${endif}
-            ${if(body)}
             <div class="posts-list">
                 ${body}
             </div>
-            ${endif}
         ${endif}
         </div>
         ${partials/footer.html()}
