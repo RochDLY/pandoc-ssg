@@ -5,40 +5,36 @@
     </head>
     <body>
         ${partials/header.html()}
-        <main>
-            ${if(title)}
-            <header class="article-header">
-                <h1>${title}</h1>
-                ${if(subtitle)}
-                <h2>${subtitle}</h2>
-                ${endif}
-                ${if(date)}
-                <time>${date}</time>
-                ${endif}
-                ${if(author)}
-                <p>${author}</p>
-                ${endif}
-            </header>
-            ${endif}
-            ${if(body)}
-                <div class="side">
-                    ${if(toc)}
-                        <nav class="toc">
-                        ${table-of-contents}
-                        </nav>
-                    ${endif}
-                </div>
-                <div class="main">
-                    ${body}
-                    ${if(refs)}
-                    <h2>Références</h2>
-                    ${refs}
-                    ${endif}
-                </div>
-                <div class="sidenotes">
-                </div>
-            ${endif}
-        </main>
-        ${partials/footer.html()}
+        <div class="side">
+${if(toc)}
+            <nav class="toc">
+${table-of-contents}
+            </nav>
+${endif}
+        </div>
+            <div class="content">
+${if(title)}
+                <header class="article-header">
+                    <h1>${title}</h1>
+${if(subtitle)}
+                    <h2>${subtitle}</h2>
+${endif}
+${if(date)}
+                    <time>${date}</time>
+${endif}
+${if(author)}
+                    <p>${author}</p>
+${endif}
+                </header>
+${endif}
+${if(body)}
+${body}
+${if(refs)}
+                <h2>Références</h2>
+${refs}
+${endif}
+            </div>
+${endif}
+${partials/footer.html()}
     </body>
 </html>
