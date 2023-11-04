@@ -3,10 +3,11 @@ body {
     background-position: 0px 0px, 4px 3px;
     background-size: 8px 6px;
     background-color: rgb(255, 255, 255);
+    display: grid;
+    gap: 20px;
 }
 
-header {
-    padding: 20px; /* some padding */
+.main-header {
     text-align: left; /* center the text */
     background-color: rgb(255, 255, 255);
     border: 3px solid black;
@@ -44,12 +45,6 @@ header {
     box-sizing: border-box;
   }
 
-/* Column container */
-.grid {
-    display: grid;
-    gap: 20px;
-    grid-template-columns: 1fr 2fr 1fr;
-}
 
 /* Create two unequal columns that sits next to each other */
 /* Sidebar/left column */
