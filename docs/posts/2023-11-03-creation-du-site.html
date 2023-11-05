@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-        <title>Création du site</title>
+        <title>Construire un générateur de carnet</title>
         <meta name="dcterms.date" content="2023-11-03" />
         <meta name="generator" content="Pandoc, GNU make" />
         <!-- pandoc - https://pandoc.org/ -->
@@ -21,13 +21,18 @@
             <nav class="toc">
 <ul>
 <li><a href="#préambule" id="toc-préambule">Préambule</a></li>
-<li><a href="#le-montage-du-générateur" id="toc-le-montage-du-générateur">Le montage du générateur</a></li>
+<li><a href="#le-montage-du-générateur" id="toc-le-montage-du-générateur">Le montage du générateur</a>
+<ul>
+<li><a href="#make-cest-trop-cool" id="toc-make-cest-trop-cool">Make c’est trop cool</a></li>
+<li><a href="#architecture-des-documents" id="toc-architecture-des-documents">Architecture des documents</a></li>
+<li><a href="#les-commandes" id="toc-les-commandes">Les commandes</a></li>
+</ul></li>
 </ul>
             </nav>
         </div>
             <div class="container">
                 <header class="header-bloc">
-                    <h1>Création du site</h1>
+                    <h1>Construire un générateur de carnet</h1>
                     <time>2023-11-03</time>
                 </header>
                 <div class="content">
@@ -43,10 +48,69 @@
 <p>Les choix sont multiples et vastes, mais je n’ai pas non plus un temps indéfini pour choisir et développer mon carnet. Grâce à des échanges avec <a href="https://www.arthurperret.fr/">Arthur Perret</a><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, <a href="https://www.quaternum.net/">Antoine Fauchié</a> et <a href="https://www.lobrassard.net/">Louis-Olivier Brassard</a>, je décide de faire un générateur de carnet statique sur mesure avec les outils <a href="https://www.gnu.org/software/make/">Make</a> et Pandoc.</p>
 <p>Bien évidemment, tout n’est pas construit complètement de zéro : Make s’occupe de recompiler avec Pandoc les différentes sources pour produire les fichiers <code>.html</code> de mon carnet web. Ce qui veut dire que je n’ai pas de regard sur le code (texte) qui produit les transformations et les conversions de mes sources (ceci fera, je l’espère, l’objet d’un billet). Ces outils étant <em>open source</em>, je suis <em>a minima</em> en capacité d’aller les lire, chose que je laisse de côté pour plus tard.</p>
 <h2 id="le-montage-du-générateur">Le montage du générateur</h2>
+<p>La base du générateur est donc construite à partir des piles logicielles Pandoc et Make. Lorsque j’appelle <code>make</code> dans mon terminal, je peux lui demander d’exécuter un certains nombres de commandes telles que <code>make html</code> ou <code>make clean</code> derrière lesquelles se trouvent des recettes et sous-recettes dont l’objectif est de produire et d’organiser le carnet web tel qu’il est ensuite déployé sur son hébergement.</p>
+<h3 id="make-cest-trop-cool">Make c’est trop cool</h3>
+<p>La beauté de Make réside dans la possibilité de ne reconstruire que les fichiers qui ont été modifiés et non pas l’intégralité des pages site web ! La plupart des générateurs de sites statiques mettent en avant dans leur communication marketing la capacité du générateur à produire le site web toujours plus vite que leurs concurrents. Ce système reproduit toutes les pages du site lors de chaque reconstruction du site. La conséquence directe de ce fonctionnement se matérialise lorsque le site web contient beaucoup de pages ou de billets : construire le site prend de plus en plus de temps.</p>
+<p>Plutôt que de reproduire l’intégralité de mon carnet à chaque nouvelle modification, Make me permet de reconstruire uniquement les fichiers qui ont été modifiés. Étant donné que l’ajout des billets se fait au compte goutte, et que je ne reviendrai que très peu sur les anciens billets postés, la reconstruction du site web ne prendra jamais plus de quelques secondes, si ce n’est pas moins.</p>
+<p>Les différentes commandes peuvent être retrouvées dans le fichier <code>Makefile</code>. Dans la commande Pandoc utilisée pour transformer les sources Markdown vers HTML, le nom du fichier à transformer est remplacer par la variable automatique <code>$&lt;</code> de Make. Cette variable sert à appeler la première cible de la recette Make, qui dans le cas de ce carnet, prend par exemple la forme suivante : <code>src/posts/%.md</code>. Cette cible est particulière : il ne s’agit pas de lui donner un fichier spécifique mais de lui donner tous les documents (symbolisé par la <em>wildcard</em> <code>%</code>) avec pour extension <code>.md</code>. Ensuite, Make compare la date de dernière modification de la source, qu’il compare avec celle du fichier produit et si la date de dernière modification de la source est plus récente que celle du fichier <code>.html</code> alors il reconstruit l’<em>output</em><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
+<h3 id="architecture-des-documents">Architecture des documents</h3>
+<p>Afin de pouvoir appliquer ce fonctionnement à un site web, il convient de définir une architecture du projet et de la respecter rigoureusement. Voici celle mise en place pour ce carnet :</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pandoc-ssg/</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> docs</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   ├── css</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   │   └── styles.css</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   ├── pages</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   │   ├── colophon.html</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   │   ├── cours.html</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   │   ├── glossaire.html</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   │   └── publications.html</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   ├── posts</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   │   ├── 2023-11-03-creation-du-site.html</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   │   └── etc.</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   └── index.html</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> src</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   ├── bibliography</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   │   └── references.bib</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   ├── pages</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   │   ├── colophon.md</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   │   ├── cours.md</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   │   ├── glossaire.md</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   │   └── publications.md</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   ├── posts</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   │   ├── 2023-11-03-creation-du-site.md</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   │   └── etc.</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> static</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   ├── css</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   │   └── styles.css</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> templates</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   ├── csl</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   │   └── apa.csl</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   ├── partials</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   │   ├── footer.html</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   │   ├── head.html</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   │   ├── header.html</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   │   └── nav.html</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   ├── index.html</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   └── post.html</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> Makefile</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> metadata.yaml</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="ex">└──</span> README.md</span></code></pre></div>
+<h3 id="les-commandes">Les commandes</h3>
+<p>La production du site est réalisée vie une série de commandes Make et Pandoc.</p>
+<pre><code>make clean</code></pre>
+<p>Supprime tous les fichiers dans le dossier <code>docs/</code>.</p>
+<pre><code>make html</code></pre>
+<p>Cette commande permet de produire les fichiers <code>HTML</code> du site dans le dossier <code>docs/</code> à partir des sources contenues dans le dossier <code>src/</code></p>
+<pre><code>make serve</code></pre>
+<p><code>make serve</code> permet de jouer le site en local (<em>localhost</em>).</p>
+<pre><code>make all</code></pre>
+<p>Cette dernière commande réalise trois actions dans l’ordre suivant : <code>make clean</code>, puis <code>make html</code> et enfin <code>make serve</code>. Il n’y a pas de système de reconstruction automatique du site intégré dans ce Makefile. Chaque modification nécessite de recompiler manuellement les documents : toutes les actions n’ont pas à être automatisées, la production et la publication d’un texte ou d’un document sont, d’un point de vue personnel, des actions à réaliser soi-même.</p>
+<p>Toutefois, cette commande <code>make all</code> ne respecte pas complètement le fonctionnement de Make décrit précédemment car en supprimant la totalité du site à chaque fois que cette commande est lancée, Make reconstruit en conséquence toutes les pages du site. Il y a moins d’intérêt à l’utiliser couramment, alors que la commande <code>make html</code> ne produit que les fichiers sources modifiés et ne touche pas à ceux du dossier <code>docs/</code>.</p>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr />
 <ol>
-<li id="fn1"><p>Voir aussi le billet d’Arthur Perret : https://www.arthurperret.fr/blog/2022-06-22-publication-multiformats-pandoc-make.html<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>Voir aussi le billet d’Arthur Perret : https://www.arthurperret.fr/blog/2022-06-22-publication-multiformats-pandoc-make.html.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Pour plus de renseignements sur le fonctionnement de Make, voir ce <a href="https://makefiletutorial.com/">tutoriel</a>, déjà cité par Arthur Perret dans son blog. Ce tutoriel est une vrai mine d’or pour apprendre à faire un Makefile.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
             </div>
