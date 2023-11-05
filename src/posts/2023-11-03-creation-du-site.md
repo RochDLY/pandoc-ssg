@@ -149,4 +149,4 @@ Toutefois, cette commande `make all` ne respecte pas complètement le fonctionne
 Il y a moins d'intérêt à l'utiliser couramment, alors que la commande `make html` ne produit que les fichiers sources modifiés et ne touche pas à ceux du dossier `docs/`.
 
 [^1]: Voir aussi le billet d'Arthur Perret : https://www.arthurperret.fr/blog/2022-06-22-publication-multiformats-pandoc-make.html.  
-[^2]: Pour plus de renseignements sur le fonctionnement de Make, voir ce [tutoriel](https://makefiletutorial.com/), déjà cité par Arthur Perret dans son blog. Ce tutoriel est une vrai mine d'or pour apprendre à faire un Makefile.
+[^2]: Pour plus de renseignements sur le fonctionnement de Make, voir ce [tutoriel](https://makefiletutorial.com/), déjà cité par Arthur Perret dans son blog. Ce tutoriel est une vraie mine d'or pour apprendre à faire un Makefile.
