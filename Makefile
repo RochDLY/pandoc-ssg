@@ -5,17 +5,17 @@
 ########################VARIABLES##############################
 
 POSTS := $(sort $(shell find src/posts -type f -iname '*.md'))
-POSTS_DIST := $(patsubst %.md, dist/posts/%.html, $(notdir $(POSTS)))
+POSTS_DOCS := $(patsubst %.md, docs/posts/%.html, $(notdir $(POSTS)))
 
 PAGES := $(sort $(shell find src/pages -type f -iname '*.md'))
-PAGES_DIST := $(patsubst %.md, dist/pages/%.html, $(notdir $(PAGES)))
+PAGES_DOCS := $(patsubst %.md, docs/pages/%.html, $(notdir $(PAGES)))
 
 # Copy static files recursively :
 # (Adapted from https://stackoverflow.com/questions/41993726/)
 STATIC := $(shell find static -type f)
-STATIC_DIST := $(patsubst static/%, dist/%, $(STATIC))
-$(foreach s,$(STATIC),$(foreach t,$(filter %$(notdir $s),$(STATIC_DIST)),$(eval $t: $s)))
-$(STATIC_DIST):; $(if $(wildcard $(@D)),,mkdir -p $(@D) &&) cp $^ $@
+STATIC_DOCS := $(patsubst static/%, docs/%, $(STATIC))
+$(foreach s,$(STATIC),$(foreach t,$(filter %$(notdir $s),$(STATIC_DOCS)),$(eval $t: $s)))
+$(STATIC_DOCS):; $(if $(wildcard $(@D)),,mkdir -p $(@D) &&) cp $^ $@
 
 references = src/bibliography/references.bib
 csl_file = templates/csl/apa.csl
@@ -38,16 +38,16 @@ PANDOCFLAGS = \
 all: clean html serve #pdf
 
 clean:
-	@ rm -rf dist/*
+	@ rm -rf docs/*
 
 serve:
-	@ python3 -m http.server -d dist/
+	@ python3 -m http.server -d docs/
 
 # Pandoc conversions
 # HTML
-html: $(STATIC_DIST) dist/index.html $(POSTS_DIST) $(PAGES_DIST)
+html: $(STATIC_DOCS) docs/index.html $(POSTS_DOCS) $(PAGES_DOCS)
 
-dist/index.html: src/index.md
+docs/index.html: src/index.md
 	@ echo "Index production."
 	@ pandoc \
   	$< \
@@ -56,7 +56,7 @@ dist/index.html: src/index.md
 		--output $@
 	@ echo "The index is built."
 
-dist/pages/%.html: src/pages/%.md
+docs/pages/%.html: src/pages/%.md
 	@ mkdir -p "$(@D)"
 	@ echo "Pages production."
 	@ pandoc \
@@ -66,7 +66,7 @@ dist/pages/%.html: src/pages/%.md
 		--output $@
 	@ echo "Pages are built."
 
-dist/posts/%.html: src/posts/%.md
+docs/posts/%.html: src/posts/%.md
 	@ mkdir -p "$(@D)"
 	@ echo "Production of posts."
 	@ pandoc \
@@ -78,7 +78,7 @@ dist/posts/%.html: src/posts/%.md
 	@ echo "Posts are built."
 
 # PDF
-#pdf: dist/these.pdf
+#pdf: docs/these.pdf
 
-#dist/these.pdf: src/introduction.md $(POSTS) src/conclusion.md
-#	pandoc $^ [options] -o dist/these.pdf
+#docs/these.pdf: src/introduction.md $(POSTS) src/conclusion.md
+#	pandoc $^ [options] -o docs/these.pdf

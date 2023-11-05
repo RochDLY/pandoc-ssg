@@ -1,4 +1,4 @@
-# Carnet de recherche - Roch delannay
+# Carnet de doctorant - Roch delannay
 
 Ce site a été construit avec [GNU Make](https://www.gnu.org/software/make/) et [Pandoc](https://pandoc.org/).
 
@@ -6,7 +6,7 @@ Ce site a été construit avec [GNU Make](https://www.gnu.org/software/make/) et
 
 ```
 pandoc-ssg/
-├── dist
+├── docs
 │   ├── css
 │   │   └── styles.css
 │   ├── pages
@@ -58,7 +58,7 @@ La production du site est réalisée vie une série de commandes Make.
 ```
 make html
 ```
-Cette commande permet de produire les fichiers `HTML` du site dans le dossier `dist/`.
+Cette commande permet de produire les fichiers `HTML` du site dans le dossier `docs/`.
 
 ```
 make serve
@@ -68,4 +68,4 @@ make serve
 ```
 make clean
 ```
-Cette dernière commande supprime tous les documents qui se trouvent dans le dossier `dist/`
+Cette dernière commande supprime tous les documents qui se trouvent dans le dossier `docs/`
