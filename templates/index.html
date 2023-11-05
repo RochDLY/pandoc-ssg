@@ -7,11 +7,18 @@
         ${partials/header.html()}
             ${if(title)}
             <div class="description-site">
-                <h1>${title}</h1>
+                <header class="header-bloc">
+                    <h2>${title}</h2>
+                </header>
                 <p>${description}</p>
             </div>
             <div class="posts-list">
+                <header class="header-bloc">
+                    <h2>Billets de blog</h2>
+                </header>
+            <div>
                 ${body}
+            </div>
             </div>
         ${endif}
         </div>

@@ -1,6 +1,5 @@
 ---
 title: Création du site
-author: Roch Delannay
 date: "2023-11-03"
 ---
 

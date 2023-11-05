@@ -12,9 +12,9 @@ ${table-of-contents}
             </nav>
 ${endif}
         </div>
-            <div class="content">
+            <div class="container">
 ${if(title)}
-                <header class="header-post">
+                <header class="header-bloc">
                     <h1>${title}</h1>
 ${if(subtitle)}
                     <h2>${subtitle}</h2>
@@ -28,6 +28,7 @@ ${endif}
                 </header>
 ${endif}
 ${if(body)}
+                <div class="content">
 ${body}
 ${if(refs)}
                 <h2>Références</h2>
@@ -35,6 +36,7 @@ ${refs}
 ${endif}
             </div>
 ${endif}
+        </div>
 ${partials/footer.html()}
     </body>
 </html>
