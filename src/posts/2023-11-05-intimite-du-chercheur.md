@@ -3,7 +3,7 @@ title: Définir l'intimité du chercheur
 date: "2023-11-05"
 ---
 
-Note : ce billet a été écrit dans mon autre carnet mais n'y a jamais été publié. J'ai commencé son écriture à l'été 2022 et ce chantier est toujours en cours (notamment revenir sur différentes parties problématiques).
+Note : ce billet a été écrit dans mon autre carnet mais n'y a jamais été publié. J'ai commencé son écriture à l'été 2023 et ce chantier est toujours en cours (notamment revenir sur différentes parties problématiques).
 
 ## Introduction 
 
