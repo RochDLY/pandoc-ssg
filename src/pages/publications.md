@@ -13,13 +13,18 @@ title: Publications savantes
     - Delannay, R., Fauchié, A., Sinatra, M., Vitali-Rosati, M. (2023). Exploring New (Digital) Publishing Practices with *Le Pressoir*, *POP! Public. Open. Participatory*.
     - Delannay, R. (2022), Lecture de La Bienveillance des machines. Comment le numérique nous transforme à notre insu, *Sens public*.
 
+- **Chapitres d'ouvrage**
+
+    - Delannay, R. *et al.*, (2023). « Notes sur le projet Digital Leigh Hunt ». Dans R. Alessi et M. Vitali-Rosati (dirs.), _Les éditions critiques numériques : Entre édition et changement de paradigme_, Presses Universitaires de Montréal, Montréal.
+
 - **Mémoire** 
 
     - Delannay, R. (2021). *L'Invention de Morel au prisme de l'éthique des données personnelles* [Mémoire, Université Paris 8].
 
-- **Ouvrages collectifs**
+- **Monographie**
 
-    - Delannay, R. *et al.*, (2023). « Notes sur le projet Digital Leigh Hunt ». Dans R. Alessi et M. Vitali-Rosati (dirs.), _Les éditions critiques numériques : Entre édition et changement de paradigme_, Presses Universitaires de Montréal, Montréal.
+    - Delannay, R., & Severo, M. (Éds.). (à paraître). _Contribution numérique : cultures et savoirs_. Les Ateliers de [sens public].
+
 
 - **Rapports de recherche**
 
