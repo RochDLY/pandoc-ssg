@@ -5,13 +5,14 @@
     </head>
     <body>
         ${partials/header.html()}
+        ${if(toc)}
         <div class="side">
-${if(toc)}
+
             <nav class="toc">
 ${table-of-contents}
             </nav>
-${endif}
         </div>
+        ${endif}
             <div class="container">
 ${if(title)}
                 <header class="header-bloc">

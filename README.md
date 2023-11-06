@@ -1,6 +1,6 @@
 # Carnet de doctorant - Roch delannay
 
-Ce site a été construit avec [GNU Make](https://www.gnu.org/software/make/) et [Pandoc](https://pandoc.org/).
+Ce site a été construit avec [GNU Make 4.3](https://www.gnu.org/software/make/) et [Pandoc 3.1.1](https://pandoc.org/).
 
 ## Organisation des fichiers
 
@@ -48,12 +48,9 @@ pandoc-ssg/
 
 ```
 
-
-
-
 ## Production du site
 
-La production du site est réalisée vie une série de commandes Make.
+Pour construire le site, utiliser les commandes suivantes :
 
 ```
 make html
@@ -69,3 +66,8 @@ make serve
 make clean
 ```
 Cette dernière commande supprime tous les documents qui se trouvent dans le dossier `docs/`
+
+## Remerciements
+
+Merci à [Louis-Olivier Brassard](https://www.lobrassard.net/), pour toutes les explications sur le fonctionnement de Make et pour les bouts de code que je t'ai emprunté.
+Merci également à [Arthur Perret](https://www.arthurperret.fr/) pour ton idée de combiner Make et Pandoc (d'ailleurs ce générateur de carnet est un _fork_ de ton projet).

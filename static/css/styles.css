@@ -1,3 +1,9 @@
+blockquote {
+    background-color: #3333332a;
+    font-style: italic;
+    padding: 1em;
+}
+
 /* Merci à https://tomasp.net/techdims/ pour le code et l'idée du background ! */
 body {
     background-image: radial-gradient(4px at center,black 20%, transparent 20%), radial-gradient(4px at center,black 20%, transparent 20%);
