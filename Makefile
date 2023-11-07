@@ -19,6 +19,7 @@ $(STATIC_DOCS):; $(if $(wildcard $(@D)),,mkdir -p $(@D) &&) cp $^ $@
 
 references = src/bibliography/references.bib
 csl_file = templates/csl/apa.csl
+metadata_site = src/metadata.yml
 
 PANDOCFLAGS = \
 	--from markdown \
@@ -27,6 +28,7 @@ PANDOCFLAGS = \
 	--citeproc \
 	--wrap none \
 	--bibliography $(references) \
+	--metadata-file $(metadata_site) \
 	--csl $(csl_file)
 
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr" xml:lang="fr">
+<html lang="${lang}" xml:lang="${lang}">
     <head>
         ${partials/head.html()}
     </head>
@@ -11,7 +11,7 @@
                     <h2>${title}</h2>
                 </header>
                 <div class="content">
-                    <p>${description}</p>
+                    <p>${resume}</p>
                 </div>
             </div>
             <div class="posts-list">
@@ -23,7 +23,6 @@
             </div>
             </div>
         ${endif}
-        </div>
         ${partials/footer.html()}
     </body>
 </html>

@@ -1,6 +1,8 @@
 <footer>
     <div>
-        <p>CC BY Roch Delannay</p>
+        ${if(rights)}
+        <p>${rights-short} ${author-meta}</p>
+        ${endif}
         <p>Créé avec Pandoc et Make</p>
         <a href="/pages/colophon.html">Colophon</a>
     </div>

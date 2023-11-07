@@ -2,7 +2,7 @@
 title: Colophon
 ---
 
-## Mentions
+## Licence
 
 Sauf mention contraire, les contenus publiés sur ce site sont réutilisables suivant les termes de la licence Creative Commons Attribution 4.0 International (CC BY), cf. [résumé](https://creativecommons.org/licenses/by/4.0/deed.fr) et [texte intégral](https://creativecommons.org/licenses/by/4.0/legalcode.fr).
 

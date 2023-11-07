@@ -1,0 +1,21 @@
+# Fichier de configuration du site web.
+# Contient les métadonnées générales.
+
+title: "Roch Delannay"
+
+subtitle: "Pensées d'un doctorant"
+
+description: "Blog | Carnet de recherche de Roch Delannay"
+
+lang: "fr"
+
+author: "Roch Delannay"
+
+resume : |
+  _Pensées d'un doctorant_ est le carnet où je publie des écrits liés à la recherche que je mène sur l'intimité du chercheur. Je m'appelle Roch Delannay et je suis doctorant en humanités numériques au département de littératures et langues du monde de l'Université de Montréal, en cotutelle avec l'Université Paris Nanterre en sciences de l'information et de la communication. Le titre des _pensées_, en lien avec l'intimité convoquée il y a quelques mots, n'est pas sans rapport avec les _Pensées pour moi-même_ de Marc Aurèle. Le sujet qui anime ce carnet, l'intime, est donc très éloigné de son acception contemporaine. Pour en découvrir plus, je vous invite à lire les billets que je publie.
+
+
+rights: |
+  Sauf mention contraire, les contenus publiés sur ce site sont réutilisables suivant les termes de la licence Creative Commons Attribution 4.0 International (CC BY), cf. [résumé](https://creativecommons.org/licenses/by/4.0/deed.fr) et [texte intégral](https://creativecommons.org/licenses/by/4.0/legalcode.fr).
+
+rights-short : "CC BY 4.0"
